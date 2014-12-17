@@ -8,7 +8,6 @@ if SERVER then
 		if controller then
 
 			if ent2:IsPlayer() then return true end
-			if ent2:IsWorld() and ( controller.world == 1 ) then return false end
 
 			local marks = controller.marks 
 			
