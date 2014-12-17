@@ -1,4 +1,4 @@
-Wire_Collision_Controller
+Wire Collision Controller
 =========================
 
-Enables the custom collision check
+Enables the custom collision check.
