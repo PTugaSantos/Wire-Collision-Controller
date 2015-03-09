@@ -8,17 +8,10 @@ DEFINE_BASECLASS( 'base_wire_entity' )
 ENT.Author			= 'PTugaSantos'
 ENT.PrintName 		= 'Wire Collision Controller'
 ENT.WireDebugName 	= 'Collision Controller'
-ENT.Type 			= 'anim'
 
 if CLIENT then 
-	
-	function ENT:Draw()
 
-		self:DrawModel()
-
-	end
-	
-	language.Add( 'SBoxLimit_wire_collision_controller', "You've hit the Wire Collision Controller limit!" )
+	language.Add( 'SBoxLimit_wire_collision_controller', 'You' .. string.char( 39 ) .. 've hit the Wire Collision Controller limit!' )
 	
 	return
 	
@@ -39,11 +32,11 @@ if SERVER then
 
 		self.marks = {}
 
-		self.Inputs = WireLib.CreateInputs( self, { 'Add_Entity [ENTITY]' } )
+		self.Inputs = WireLib.CreateInputs( self, { 'Add Entity [ENTITY]' } )
 		self.Outputs = WireLib.CreateOutputs( self, { 'Entities [ARRAY]' } )
 		
-		self:SetOverlayText( 'Collision Controller' ) // Doesn't want to work, for some reason...
-
+		self:SetOverlayText( 'Number of entities linked: ' .. table.Count( self.marks ) )
+		
 	end
 	
 	function ENT:TriggerInput( name, value )
@@ -55,7 +48,7 @@ if SERVER then
 			self:Link( value )
 			
 		end
-	
+		
 	end
 	
 	function ENT:UpdateOutputs()
@@ -82,9 +75,9 @@ if SERVER then
 			ent:CPPISetOwner( ply )
 
 		end
-		
-		ent.owner = ply
-		
+
+		ent:SetPlayer( ply )
+
 		cleanup.Add( ply, 'gmod_wire_collision_controller', ent )
 		
 		ply:AddCount( 'wire_collision_controller', ent )

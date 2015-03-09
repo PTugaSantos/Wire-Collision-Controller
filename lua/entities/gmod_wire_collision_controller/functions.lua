@@ -29,7 +29,7 @@ if SERVER then
 	
 	function ENT:Link( ent )
 		
-		if ( ent:GetClass() == 'gmod_wire_collision_controller' ) or not gamemode.Call( 'CanTool', self.owner, { Entity = ent }, 'wire_collision_controller' ) then return end
+		if ( ent:GetClass() == 'gmod_wire_collision_controller' ) or not gamemode.Call( 'CanTool', self:GetPlayer(), { Entity = ent }, 'wire_collision_controller' ) then return end
 		
 		if ent and ent:IsValid() then
 		
@@ -59,6 +59,8 @@ if SERVER then
 			
 		end
 		
+		self:SetOverlayText( 'Number of entities linked: ' .. table.Count( self.marks ) )
+		
 		self:UpdateOutputs()
 	
 	end
@@ -84,6 +86,8 @@ if SERVER then
 		self.marks = marks
 		
 		self:UpdateNetworkedMarks()
+		
+		self:SetOverlayText( 'Number of entities linked: ' .. table.Count( self.marks ) )
 		
 		self:UpdateOutputs()
 		
